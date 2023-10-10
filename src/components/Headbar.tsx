@@ -4,11 +4,12 @@ import { FaRegSun, FaUser, FaSignOutAlt } from "react-icons/fa";
 import Image from "next/image";
 import logo from "../../public/bsp.svg"
 import Avatar from "./Avatar";
+import { useSession, signOut } from "next-auth/react";
 
 
 const HeadBar = () => {
-    // const { username, setUsername } = useGlobalContext();
-
+    const { data: session }: any = useSession();
+    // console.log({session}.session?.user);
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -35,13 +36,13 @@ const HeadBar = () => {
                     data-dropdown-placement="bottom"
                     onClick={toggleDropdown}
                 >
-                    <text className="text-black ml-3">user@gmail.com</text>
+                    <text className="text-black ml-3 font-bold">{session?.user?.username} ({session?.user?.role})</text>
                 </button>
                 {isDropdownOpen && (
                     <div
-                        className="absolute bg-blue-400 w-[10%] mt-2 py-2 rounded shadow-lg z-50"
+                        className="absolute bg-blue-700 w-[10%] mt-2 py-2 rounded shadow-lg z-50"
                         data-dropdown-content="user-dropdown"
-                        style={{ top: "100%", right: "5px"}}
+                        style={{ top: "100%", right: "5px" }}
                     >
                         <ul className="list-none ml-3 mr-3 z-50">
                             <li>
@@ -57,10 +58,10 @@ const HeadBar = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="/auth/login" className="flex items-center p-2 text-white rounded-lg  hover:bg-blue-800 hover:text-white group space-x-5 ">
+                                <button className="flex items-center p-2 text-white rounded-lg  hover:bg-blue-800 hover:text-white group space-x-5" onClick={() => signOut()}>
                                     <FaSignOutAlt />
                                     <h1>Logout</h1>
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </div>

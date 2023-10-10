@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import HeadBar from "./Headbar";
 
 interface Props {
     children: ReactNode;
@@ -6,9 +7,12 @@ interface Props {
 
 const Content: FC<Props> = ({ children }) => {
     return (
-        <div className="min-h-max max-h-screen z-0 ">
-            {children}
-        </div>
+        <>
+            <div className="min-h-max max-h-screen z-0 ">
+                {children}
+            </div>
+        </>
+
     )
 };
 

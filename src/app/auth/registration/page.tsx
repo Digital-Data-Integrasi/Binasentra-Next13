@@ -1,6 +1,5 @@
 import Image from "next/image";
 import bsImage from "../../../../public/bina-sentra.svg"
-import FormLogin from "../login/formLogin";
 import FormRegis from "./formRegis";
 import Footer from "@/components/Footer";
 

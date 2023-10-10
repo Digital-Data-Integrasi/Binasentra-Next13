@@ -101,7 +101,7 @@ const FormRegis = () => {
                             <FormLabel>Phone</FormLabel>
                             <InputGroup>
                                 <InputLeftElement pointerEvents="none" children={<CFaPhone color="gray.500" />} />
-                                <Input placeholder="phone" type="number" {...register('phone')} />
+                                <Input placeholder="+62" type="number" {...register('phone')} />
                             </InputGroup>
                         </FormControl>
                     </HStack>
