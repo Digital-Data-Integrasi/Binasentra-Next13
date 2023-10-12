@@ -28,7 +28,7 @@ export default NextAuth({
         }),
     ],
     callbacks: {
-        async jwt({ token, account, user }:any) {
+        async jwt({ token, account, user }: any) {
             if (account?.provider === 'credentials') {
                 token.email = user.email;
                 token.username = user.username;
@@ -36,7 +36,7 @@ export default NextAuth({
             }
             return token
         },
-        async session({ session, token, user }:any) {
+        async session({ session, token, user }: any) {
             session.user = token as any;
             return session;
         },
@@ -46,6 +46,6 @@ export default NextAuth({
     },
     session: {
         strategy: 'jwt',
-        maxAge: 60 * 60 * 1
+        maxAge: 60 * 10 * 1 //10 min
     }
 });

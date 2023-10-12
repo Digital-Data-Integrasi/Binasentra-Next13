@@ -1,15 +1,15 @@
 export const metadata = {
-    title: "LA",
+    title: "Kebakaran",
     description: "",
 };
 
 export default function Page() {
     return (
         <div>
-            <h1 className="font-bold text-2xl text-gray-600">Link Analysis</h1>
-            <div className="py-4 text-gray-600">
+            <h1 className="font-bold text-2xl text-black">Kebakaran</h1>
+            <div className="py-4 text-black">
                 <p>
-                    Link Analysis
+                Kebakaran
                 </p>
             </div>
         </div>

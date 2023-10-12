@@ -1,4 +1,5 @@
 "use client"
+import { useState } from "react";
 import {
     Button,
     Card,
@@ -11,7 +12,8 @@ import {
     chakra,
     Text,
     VStack,
-    HStack
+    HStack,
+    useToast
 } from "@chakra-ui/react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,6 +23,7 @@ import { FaUserAlt, FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc"
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+
 
 
 const CFauserAlt = chakra(FaUserAlt);
@@ -39,17 +42,41 @@ const FormLogin = () => {
     const {
         handleSubmit,
         register,
-        formState: { errors }
+        formState: { errors },
     } = useForm({ defaultValues: defaultValueForms, mode: 'onBlur', resolver: yupResolver(schema) })
 
+    // Handling animation
+    const [loadingButton, setLoadingButton] = useState(false)
+    const toast = useToast();
     const submitLogin = async (f: userLogin) => {
-        const result = await signIn("credentials", {
-            email: f.email,
-            password: f.password,
-            redirect: false
-        })
-        if (!result?.error) {
-            document.location = '/framework/dashboard'
+        setLoadingButton(true)
+        try {
+            const result = await signIn("credentials", {
+                email: f.email,
+                password: f.password,
+                redirect: false
+            })
+            console.log(result)
+            if (!result?.error) {
+                setLoadingButton(false)
+                document.location = '/framework/dashboard';
+            } else {
+                setLoadingButton(false);
+                toast({
+                    title: result.error,
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true
+                })
+            }
+        } catch (error: any) {
+            setLoadingButton(false)
+            toast({
+                title: error,
+                status: 'error',
+                duration: 9000,
+                isClosable: true
+            })
         }
     };
 
@@ -78,7 +105,7 @@ const FormLogin = () => {
                     </VStack>
                     <br />
                     <VStack spacing={2}>
-                        <Button bg={'blue.600'} color={"white"} w={"100%"} h={10} onClick={handleSubmit(submitLogin)}>Masuk</Button>
+                        <Button bg={'blue.600'} color={"white"} w={"100%"} h={10} onClick={handleSubmit(submitLogin)} isLoading={loadingButton} className="hover:bg-blue-900">Masuk</Button>
                         <Text className="text-black font-semibold">ATAU</Text>
                         <Button bg={'gray.200'} variant={'outline'} w={"100%"} h={10} leftIcon={<FcGoogle />}>Masuk dengan Google</Button>
                     </VStack>

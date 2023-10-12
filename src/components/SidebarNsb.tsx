@@ -14,28 +14,27 @@ import {PiPersonDuotone} from "react-icons/pi"
 import Link from "next/link";
 
 const Menus = [
-  { title: 'Dashboard', src: '/framework/dashboard', icon: <MdOutlineDashboard /> },
   {
-    title: 'Penutupan',
+    title: 'Pengajuan',
     src: '#',
     icon: <BsServer />,
     subMenus: [
       {
-        title: 'Kebakaran',
-        src: '/framework/penutupan/pt-1',
+        title: 'Asuransi Kebakaran',
+        src: '/asuransi-kebakaran',
         icon: <FaFireAlt />,
         cName: 'sub-nav',
       },
       {
-        title: 'Jiwa',
-        src: '/framework/penutupan/pt-2',
+        title: 'Asuransi Kejiwaan',
+        src: '/asuransi/kejiwaan',
         icon: <PiPersonDuotone/>,
         cName: 'sub-nav',
       },
       {
-        title: 'Gempa Bumi',
+        title: 'Asuransi Gempa Bumi',
         icon: <RiEarthquakeFill/>,
-        src: '/framework/penutupan/pt-3',
+        src: '/asuransi/gempabumi',
       },
     ],
   },
