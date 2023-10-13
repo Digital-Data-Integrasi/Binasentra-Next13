@@ -12,6 +12,7 @@ import { FaFireAlt } from 'react-icons/fa'
 import { RiEarthquakeFill } from 'react-icons/ri';
 import {PiPersonDuotone} from "react-icons/pi"
 import Link from "next/link";
+import { useSession } from 'next-auth/react';
 
 const Menus = [
   { title: 'Dashboard', src: '/framework/dashboard', icon: <MdOutlineDashboard /> },
@@ -46,6 +47,7 @@ const Menus = [
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const [subMenuOpen, setSubMenuOpen] = useState(false);
+  
   return (
     <div className=" h-screen flex items-end justify-end w-[15%] fixed">
       <div

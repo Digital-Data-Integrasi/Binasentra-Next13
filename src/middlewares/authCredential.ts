@@ -17,7 +17,7 @@ const custPage = [
 ]
 
 export default function authCredential(
-    middleware: NextMiddleware, 
+    middleware: NextMiddleware,
     requireAuth: string[] = []) {
     return async (req: NextRequest, next: NextFetchEvent) => {
         const pathname = req.nextUrl.pathname;
@@ -32,9 +32,14 @@ export default function authCredential(
                 return NextResponse.redirect(url)
             }
             // Admin Only
-            // if (token.role !== 'Admin' && adminPage.includes(pathname)) {
-            //     return NextResponse.redirect(new URL("/"))
-            // }
+            if (token.role !== 'Admin' && adminPage.includes(pathname)) {
+                return NextResponse.redirect(new URL("/auth/login", req.url))
+            }
+
+            // Customer onlye
+            if (token.role !== "User" && custPage.includes(pathname)) {
+                return NextResponse.redirect(new URL("/auth/login", req.url))
+            }
             return middleware(req, next)
         }
     }

@@ -59,7 +59,7 @@ const FormLogin = () => {
             console.log(result)
             if (!result?.error) {
                 setLoadingButton(false)
-                document.location = '/framework/dashboard';
+                document.location = '/auth/postLogin';
             } else {
                 setLoadingButton(false);
                 toast({
